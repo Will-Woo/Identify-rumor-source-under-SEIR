@@ -45,17 +45,13 @@ for k in range(100):
     G.node[root]['node_state'] = 'I' #设置根节点状态为I
     I_state.append(root)  #把根节点入列表
     
-    #i = 0
     for i in range(num):
         if i != root:
             G.node[i]['node_state'] = 'S'
-    
-           
-    #runTime = ra.randint(3,20)
+  
     print("运行时间：" + str(runTime))
     t = 1
     while(t<=runTime):
-        #I_node = 0
         for I_node in I_state:
             I_neighbor_list = nx.all_neighbors(G, I_node)
             for I_neighbor_node in I_neighbor_list:
@@ -74,7 +70,6 @@ for k in range(100):
                 I_state.remove(I_node)
                 #print("节点" + str(I_node) + "在时刻t = " + str(t) + "恢复！")
                 
-        #E_node = 0
         for E_node in E_state:
             if G.node[E_node]['node_time'] != t :#判断这个节点收到谣言的时间
                 random = ra.randint(1,100)
@@ -115,27 +110,23 @@ for k in range(100):
             if G.node[node]['maxValueECC'] == ecc:
                 jNode = node
                 jNodeSet.append(jNode)
-        #if len(jNodeSet) <= 10:
         for NI in jNodeSet:
             print("乔丹节点：" + str(NI) + ", eccentricity : " + str(ecc))
             if NI == root:
                 jCount+=1
                 print("乔丹节点等于根节点! 目前成功数：" + str(jCount))
-                #print("===========exception==========" + str(exception))
             else:
                 #distant_jNode = snap.GetShortPath(G5, jNode, root)
                 print("乔丹节点距离根节点：" + str(ecc) + " 跳. 目前成功数：" + str(jCount))
-                #print("===========exception==========" + str(exception))
     
         print("例外个数：" + str(exception))   
         print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        
         #CC Algorithm
-        #node = 0
         temp = 0
         closeness = 0
         for node in range(num) :
             if G.node[node]['node_state'] == 'I' or G.node[node]['node_state'] == 'R' :
-                #closeness = 0
                 closeness = nx.closeness_centrality(G,node)
                 if closeness > temp :
                     temp = closeness
